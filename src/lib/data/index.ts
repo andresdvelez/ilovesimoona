@@ -245,7 +245,7 @@ export async function getToken(credentials: StorePostAuthReq) {
       return access_token
     })
     .catch((err) => {
-      throw new Error("Wrong email or password.")
+      throw new Error("Email o contraseña incorrecta.")
     })
 }
 
@@ -381,7 +381,7 @@ export const getRegion = cache(async function (countryCode: string) {
 
     const region = countryCode
       ? regionMap.get(countryCode)
-      : regionMap.get("us")
+      : regionMap.get("co")
 
     return region
   } catch (e: any) {

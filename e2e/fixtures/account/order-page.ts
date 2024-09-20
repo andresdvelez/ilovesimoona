@@ -66,7 +66,7 @@ export class OrderPage extends AccountPage {
         hasText: title,
       })
       .filter({
-        hasText: `Variant: ${variant}`,
+        hasText: `Variante: ${variant}`,
       })
     return {
       productRow,

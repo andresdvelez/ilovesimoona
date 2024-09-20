@@ -37,7 +37,7 @@ export class CartDropdown {
         hasText: name,
       })
       .filter({
-        hasText: `Variant: ${variant}`,
+        hasText: `Variante: ${variant}`,
       })
     return {
       locator: cartItem,

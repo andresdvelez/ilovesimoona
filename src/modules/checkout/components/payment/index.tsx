@@ -116,7 +116,7 @@ const Payment = ({
             }
           )}
         >
-          Payment
+          Pago
           {!isOpen && paymentReady && <CheckCircleSolid />}
         </Heading>
         {!isOpen && paymentReady && (
@@ -126,7 +126,7 @@ const Payment = ({
               className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               data-testid="edit-payment-button"
             >
-              Edit
+              Editar
             </button>
           </Text>
         )}
@@ -159,7 +159,7 @@ const Payment = ({
               {isStripe && stripeReady && (
                 <div className="mt-5 transition-all duration-150 ease-in-out">
                   <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                    Enter your card details:
+                    Introduzca los datos de su tarjeta:
                   </Text>
 
                   <CardElement
@@ -179,13 +179,13 @@ const Payment = ({
           ) : paidByGiftcard ? (
             <div className="flex flex-col w-1/3">
               <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                Payment method
+                Método de pago
               </Text>
               <Text
                 className="txt-medium text-ui-fg-subtle"
                 data-testid="payment-method-summary"
               >
-                Gift card
+                Tarjeta regalo
               </Text>
             </div>
           ) : (
@@ -210,7 +210,7 @@ const Payment = ({
             }
             data-testid="submit-payment-button"
           >
-            Continue to review
+            Continuar con revisión de detalles
           </Button>
         </div>
 
@@ -219,7 +219,7 @@ const Payment = ({
             <div className="flex items-start gap-x-1 w-full">
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment method
+                  Método de pago
                 </Text>
                 <Text
                   className="txt-medium text-ui-fg-subtle"
@@ -238,7 +238,7 @@ const Payment = ({
               </div>
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment details
+                  Detalles de pago
                 </Text>
                 <div
                   className="flex gap-2 txt-medium text-ui-fg-subtle items-center"
@@ -252,7 +252,7 @@ const Payment = ({
                   <Text>
                     {cart.payment_session.provider_id === "stripe" && cardBrand
                       ? cardBrand
-                      : "Another step will appear"}
+                      : "Otro paso aparecerá"}
                   </Text>
                 </div>
               </div>
@@ -260,13 +260,13 @@ const Payment = ({
           ) : paidByGiftcard ? (
             <div className="flex flex-col w-1/3">
               <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                Payment method
+                Método de pago
               </Text>
               <Text
                 className="txt-medium text-ui-fg-subtle"
                 data-testid="payment-method-summary"
               >
-                Gift card
+                Tarjeta regalo
               </Text>
             </div>
           ) : null}

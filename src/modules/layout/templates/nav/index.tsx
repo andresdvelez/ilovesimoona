@@ -4,6 +4,8 @@ import { listRegions } from "@lib/data"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
+import Image from "next/image"
+import LogoImage from "../../../../../public/logo_sh.svg"
 
 export default async function Nav() {
   const regions = await listRegions().then((regions) => regions)
@@ -18,13 +20,13 @@ export default async function Nav() {
             </div>
           </div>
 
-          <div className="flex items-center h-full">
+          <div className="flex items-center h-full relative">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
+              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase relative w-[150px] h-[55px]"
               data-testid="nav-store-link"
             >
-              Medusa Store
+              <Image alt="Ilovesimoona" fill src={LogoImage} />
             </LocalizedClientLink>
           </div>
 
@@ -37,7 +39,7 @@ export default async function Nav() {
                   scroll={false}
                   data-testid="nav-search-link"
                 >
-                  Search
+                  Buscar
                 </LocalizedClientLink>
               )}
               <LocalizedClientLink
@@ -45,7 +47,7 @@ export default async function Nav() {
                 href="/account"
                 data-testid="nav-account-link"
               >
-                Account
+                Cuenta
               </LocalizedClientLink>
             </div>
             <Suspense
@@ -55,7 +57,7 @@ export default async function Nav() {
                   href="/cart"
                   data-testid="nav-cart-link"
                 >
-                  Cart (0)
+                  Carrito (0)
                 </LocalizedClientLink>
               }
             >

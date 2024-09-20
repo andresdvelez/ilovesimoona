@@ -60,7 +60,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
       <div className="txt-medium">
         {gift_cards.length > 0 && (
           <div className="flex flex-col mb-4">
-            <Heading className="txt-medium">Gift card(s) applied:</Heading>
+            <Heading className="txt-medium">Tarjetas de regalo aplicadas:</Heading>
             {gift_cards?.map((gc) => (
               <div
                 className="flex items-center justify-between txt-small-plus"
@@ -90,7 +90,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   data-testid="remove-gift-card-button"
                 >
                   <Trash size={14} />
-                  <span className="sr-only">Remove gift card from order</span>
+                  <span className="sr-only">Eliminar tarjeta regalo del pedido</span>
                 </button>
               </div>
             ))}
@@ -100,13 +100,13 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         {appliedDiscount ? (
           <div className="w-full flex items-center">
             <div className="flex flex-col w-full">
-              <Heading className="txt-medium">Discount applied:</Heading>
+              <Heading className="txt-medium">Descuento aplicado:</Heading>
               <div
                 className="flex items-center justify-between w-full max-w-full"
                 data-testid="discount-row"
               >
                 <Text className="flex gap-x-1 items-baseline txt-small-plus w-4/5 pr-1">
-                  <span>Code:</span>
+                  <span>Código:</span>
                   <span className="truncate" data-testid="discount-code">
                     {discounts[0].code}
                   </span>
@@ -125,7 +125,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                 >
                   <Trash size={14} />
                   <span className="sr-only">
-                    Remove discount code from order
+                  Eliminar el código de descuento del pedido
                   </span>
                 </button>
               </div>
@@ -140,9 +140,9 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                 className="txt-medium text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
                 data-testid="add-discount-button"
               >
-                Add gift card or discount code
+                Añadir tarjeta de regalo o código de descuento
               </button>
-              <Tooltip content="You can add multiple gift cards, but only one discount code.">
+              <Tooltip content="Puedes añadir multiples tarjetas de regalo, pero sólo un código de descuento.">
                 <InformationCircleSolid color="var(--fg-muted)" />
               </Tooltip>
             </Label>
@@ -150,7 +150,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
               <>
                 <div className="flex w-full gap-x-2 items-center">
                   <Input
-                    label="Please enter code"
+                    label="Ingrese su código"
                     name="code"
                     type="text"
                     autoFocus={false}

@@ -1,18 +1,19 @@
 import { Text } from "@medusajs/ui"
 
-import Medusa from "../../../common/icons/medusa"
-import NextJs from "../../../common/icons/nextjs"
+import Norvik from "../../../../../public/norvik-logo.png"
+import Image from "next/image"
 
 const MedusaCTA = () => {
   return (
     <Text className="flex gap-x-2 txt-compact-small-plus items-center">
-      Powered by
-      <a href="https://www.medusajs.com" target="_blank" rel="noreferrer">
-        <Medusa fill="#9ca3af" className="fill-[#9ca3af]" />
-      </a>
-      &
-      <a href="https://nextjs.org" target="_blank" rel="noreferrer">
-        <NextJs fill="#9ca3af" />
+      Desarrollado por
+      <a
+        href="https://www.norvik.tech"
+        target="_blank"
+        rel="noreferrer"
+        className="relative w-[125px] h-[65px]"
+      >
+        <Image src={Norvik} alt="Norvik tech" fill className="fill-[#9ca3af]" />
       </a>
     </Text>
   )

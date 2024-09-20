@@ -78,7 +78,7 @@ export class OrderPage extends BasePage {
         hasText: title,
       })
       .filter({
-        hasText: `Variant: ${variant}`,
+        hasText: `Variante: ${variant}`,
       })
     return {
       productRow,
