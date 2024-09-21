@@ -69,7 +69,6 @@ const Payment = ({
     },
     [searchParams]
   )
-
   const set = async (providerId: string) => {
     setIsLoading(true)
     await setPaymentMethod(providerId)

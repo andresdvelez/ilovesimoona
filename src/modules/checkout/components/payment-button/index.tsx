@@ -37,6 +37,8 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
 
   const paymentSession = cart.payment_session as PaymentSession
 
+  console.log(paymentSession)
+
   switch (paymentSession.provider_id) {
     case "stripe":
       return (

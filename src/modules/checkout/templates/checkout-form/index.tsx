@@ -38,6 +38,8 @@ export default async function CheckoutForm() {
     return null
   }
 
+  console.log(cart)
+
   // get customer if logged in
   const customer = await getCustomer()
 

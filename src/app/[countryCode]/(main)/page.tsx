@@ -6,6 +6,9 @@ import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
 import { ProductCollectionWithPreviews } from "types/global"
 import { cache } from "react"
+import PaymentProviders from "@lib/util/get-payment-providers"
+import { MedusaProvider } from "medusa-react"
+import { QueryClient } from "@tanstack/react-query"
 
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
