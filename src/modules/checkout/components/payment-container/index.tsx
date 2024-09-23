@@ -23,8 +23,6 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
 }) => {
   const isDevelopment = process.env.NODE_ENV === "development"
 
-  console.log(paymentInfoMap)
-
   return (
     <>
       <RadioGroup.Option

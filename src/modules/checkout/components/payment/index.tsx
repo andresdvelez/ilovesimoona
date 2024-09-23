@@ -143,6 +143,7 @@ const Payment = ({
                     return a.provider_id > b.provider_id ? 1 : -1
                   })
                   .map((paymentSession) => {
+                    console.log(paymentSession)
                     return (
                       <PaymentContainer
                         paymentInfoMap={paymentInfoMap}

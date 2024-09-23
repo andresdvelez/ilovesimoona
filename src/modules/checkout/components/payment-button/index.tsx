@@ -9,6 +9,7 @@ import { placeOrder } from "@modules/checkout/actions"
 import React, { useState } from "react"
 import ErrorMessage from "../error-message"
 import Spinner from "@modules/common/icons/spinner"
+import { useRouter } from "next/navigation"
 
 type PaymentButtonProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">
@@ -55,6 +56,14 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
     case "paypal":
       return (
         <PayPalPaymentButton
+          notReady={notReady}
+          cart={cart}
+          data-testid={dataTestId}
+        />
+      )
+    case "payu":
+      return (
+        <PayUPaymentButton
           notReady={notReady}
           cart={cart}
           data-testid={dataTestId}
@@ -249,6 +258,58 @@ const PayPalPaymentButton = ({
       </>
     )
   }
+}
+
+const PayUPaymentButton = ({
+  cart,
+  notReady,
+}: {
+  cart: Omit<Cart, "refundable_amount" | "refunded_total">
+  notReady: boolean
+}) => {
+  const [submitting, setSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const router = useRouter()
+
+  const handlePayment = async () => {
+    setSubmitting(true)
+    setErrorMessage(null)
+
+    try {
+      const response = await fetch("/api/payu/initiate-payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ cartId: cart.id }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to initiate payment")
+      }
+
+      const { paymentUrl, payDetails } = await response.json()
+
+      // Redirect to PayU payment page
+      router.push(paymentUrl)
+    } catch (error) {
+      console.error("Error initiating PayU payment:", error)
+      setErrorMessage(
+        "An error occurred while initiating the payment. Please try again."
+      )
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  return (
+    <>
+      <Button onClick={handlePayment} disabled={notReady || submitting}>
+        {submitting ? "Processing..." : "Pay with PayU"}
+      </Button>
+      {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+    </>
+  )
 }
 
 const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
