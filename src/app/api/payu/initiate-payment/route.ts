@@ -1,4 +1,5 @@
 import { medusaClient } from "@lib/config"
+import { formatAmount } from "@lib/util/prices"
 import { NextRequest, NextResponse } from "next/server"
 
 function safeStringify(obj: any) {
@@ -23,13 +24,9 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { cartId } = body
 
-    console.log("Initiating PayU payment for cart:", cartId)
-
     const result = await medusaClient.carts.setPaymentSession(cartId, {
       provider_id: "payu",
     })
-
-    console.log("SetPaymentSession result:", safeStringify(result))
 
     if (!result.cart?.payment_session) {
       throw new Error("Payment session not created")
@@ -37,14 +34,19 @@ export async function POST(req: NextRequest) {
 
     const { paymentUrl, payDetails } = result.cart.payment_session.data
 
-    // Redirect to PayU payment page
-    return NextResponse.json({ paymentUrl, payDetails }, { status: 200 })
+    return NextResponse.json(
+      {
+        paymentUrl,
+        payDetails,
+      },
+      { status: 200 }
+    )
   } catch (error) {
     console.error("Error initiating PayU payment:", error)
     return NextResponse.json(
       {
         error: "Error initiating PayU payment",
-        details: error.message,
+        details: (error as { message: string })?.message,
       },
       { status: 500 }
     )

@@ -289,6 +289,8 @@ const PayUPaymentButton = ({
 
       const { paymentUrl, payDetails } = await response.json()
 
+      console.log(payDetails)
+
       // Create a form and submit it to redirect to PayU
       const form = document.createElement("form")
       form.method = "POST"
