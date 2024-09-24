@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { medusaClient } from "@lib/config"
+import { placeOrder } from "@modules/checkout/actions"
 
 export async function POST(req: NextRequest) {
   const body = await req.formData()
@@ -7,26 +8,26 @@ export async function POST(req: NextRequest) {
   const status = body.get("state_pol")
 
   try {
-    // Retrieve the order using the reference (which should be the cart id)
-    const { order } = await medusaClient.orders.retrieveByCartId(
-      reference as string
-    )
-
-    if (!order) {
-      throw new Error("Order not found")
-    }
-
-    // Update the order status based on PayU's response
     if (status === "4") {
       // Payment approved
-      await medusaClient.orders.complete(order.id)
+      await placeOrder()
+      // The placeOrder function will handle the redirection
+      return NextResponse.json({ success: true })
     } else if (status === "6" || status === "5") {
       // Payment declined or expired
-      await medusaClient.orders.cancel(order.id)
+      const { order } = await medusaClient.orders.retrieveByCartId(
+        reference as string
+      )
+      if (order) {
+        await medusaClient.orders.cancel(order.id)
+      }
+      return NextResponse.json({ error: "Payment failed" }, { status: 400 })
     }
 
-    // Redirect to the order confirmation page
-    return NextResponse.redirect(`/order/confirmed/${order.id}`)
+    return NextResponse.json(
+      { error: "Invalid payment status" },
+      { status: 400 }
+    )
   } catch (error) {
     console.error("Error handling PayU response:", error)
     return NextResponse.json(

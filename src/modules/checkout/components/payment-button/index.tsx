@@ -269,7 +269,6 @@ const PayUPaymentButton = ({
 }) => {
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
-  const router = useRouter()
 
   const handlePayment = async () => {
     setSubmitting(true)
@@ -290,14 +289,28 @@ const PayUPaymentButton = ({
 
       const { paymentUrl, payDetails } = await response.json()
 
-      // Redirect to PayU payment page
-      router.push(paymentUrl)
+      // Create a form and submit it to redirect to PayU
+      const form = document.createElement("form")
+      form.method = "POST"
+      form.action = paymentUrl
+
+      for (const key in payDetails) {
+        if (payDetails.hasOwnProperty(key)) {
+          const hiddenField = document.createElement("input")
+          hiddenField.type = "hidden"
+          hiddenField.name = key
+          hiddenField.value = payDetails[key]
+          form.appendChild(hiddenField)
+        }
+      }
+
+      document.body.appendChild(form)
+      form.submit()
     } catch (error) {
       console.error("Error initiating PayU payment:", error)
       setErrorMessage(
         "An error occurred while initiating the payment. Please try again."
       )
-    } finally {
       setSubmitting(false)
     }
   }

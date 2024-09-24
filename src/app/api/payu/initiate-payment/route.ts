@@ -35,7 +35,10 @@ export async function POST(req: NextRequest) {
       throw new Error("Payment session not created")
     }
 
-    return NextResponse.json(result.cart.payment_session.data, { status: 200 })
+    const { paymentUrl, payDetails } = result.cart.payment_session.data
+
+    // Redirect to PayU payment page
+    return NextResponse.json({ paymentUrl, payDetails }, { status: 200 })
   } catch (error) {
     console.error("Error initiating PayU payment:", error)
     return NextResponse.json(
