@@ -1,3 +1,4 @@
+const { nextui } = require("@nextui-org/react")
 const path = require("path")
 
 module.exports = {
@@ -9,6 +10,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/modules/**/*.{js,ts,jsx,tsx}",
     "./node_modules/@medusajs/ui/dist/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -160,5 +162,6 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-radix")()],
+  darkMode: "class",
+  plugins: [require("tailwindcss-radix")(), nextui()],
 }

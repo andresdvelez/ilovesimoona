@@ -10,7 +10,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import CountrySelect from "../country-select"
 
 const SideMenuItems = {
-  Home: "/",
+  Inicio: "/",
   Productos: "/store",
   // Buscar: "/search",
   Cuenta: "/account",

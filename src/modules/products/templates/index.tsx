@@ -1,3 +1,5 @@
+"use server"
+
 import { Region } from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import React, { Suspense } from "react"

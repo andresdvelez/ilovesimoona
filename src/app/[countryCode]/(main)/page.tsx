@@ -2,16 +2,13 @@ import { Product } from "@medusajs/medusa"
 import { Metadata } from "next"
 
 import { getCollectionsList, getProductsList, getRegion } from "@lib/data"
-import FeaturedProducts from "@modules/home/components/featured-products"
-import Hero from "@modules/home/components/hero"
 import { ProductCollectionWithPreviews } from "types/global"
 import { cache } from "react"
-import PaymentProviders from "@lib/util/get-payment-providers"
-import { MedusaProvider } from "medusa-react"
-import { QueryClient } from "@tanstack/react-query"
+import { HomePage } from "@modules/home"
+import FeaturedProducts from "@modules/home/components/featured-products"
 
 export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
+  title: "I Love Simoona",
   description:
     "A performant frontend ecommerce starter template with Next.js 14 and Medusa.",
 }
@@ -71,7 +68,7 @@ export default async function Home({
 
   return (
     <>
-      <Hero />
+      <HomePage collections={collections} region={region} />
       <div className="py-12">
         <ul className="flex flex-col gap-x-6">
           <FeaturedProducts collections={collections} region={region} />
