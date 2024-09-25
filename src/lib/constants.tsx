@@ -4,6 +4,7 @@ import { CreditCard } from "@medusajs/icons"
 import Ideal from "@modules/common/icons/ideal"
 import Bancontact from "@modules/common/icons/bancontact"
 import PayPal from "@modules/common/icons/paypal"
+import PayU from "@modules/common/icons/payu"
 
 /* Map of payment provider_id to their title and icon. Add in any payment providers you want to use. */
 export const paymentInfoMap: Record<
@@ -25,6 +26,10 @@ export const paymentInfoMap: Record<
   paypal: {
     title: "PayPal",
     icon: <PayPal />,
+  },
+  payu: {
+    title: "PayU",
+    icon: <PayU />,
   },
   manual: {
     title: "Test payment",

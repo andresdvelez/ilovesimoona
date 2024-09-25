@@ -10,6 +10,7 @@ import React, { useState } from "react"
 import ErrorMessage from "../error-message"
 import Spinner from "@modules/common/icons/spinner"
 import { useRouter } from "next/navigation"
+import PayU from "@modules/common/icons/payu"
 
 type PaymentButtonProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">
@@ -319,9 +320,19 @@ const PayUPaymentButton = ({
 
   return (
     <>
-      <Button onClick={handlePayment} disabled={notReady || submitting}>
-        {submitting ? "Processing..." : "Pay with PayU"}
-      </Button>
+      <button
+        onClick={handlePayment}
+        disabled={notReady || submitting}
+        className={`bg-green-500 text-black text-lg rounded-lg transition-colors font-semibold py-2 px-4 w-full flex items-center justify-center
+                 ${
+                   notReady || submitting
+                     ? "opacity-50 cursor-not-allowed"
+                     : "hover:bg-green-600"
+                 }`}
+      >
+        {submitting ? "Procesando..." : "Pagar con"}
+        <PayU />
+      </button>
       {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
     </>
   )
