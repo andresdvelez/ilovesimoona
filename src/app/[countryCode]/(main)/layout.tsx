@@ -3,25 +3,26 @@ import { Metadata } from "next"
 import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:8000"
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000"
+const OPEN_GRAPH_IMAGE_URL = `${BASE_URL}/logo_sh.png`
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Fashion Store - Trendy Styles for Everyone",
+  title: "I love Simoona - Trendy Styles for Everyone",
   description:
-    "Discover the latest fashion trends at Fashion Store. Explore stylish clothing, accessories, and more for all genders and ages.",
+    "Discover the latest fashion trends at I love Simoona. Explore stylish clothing, accessories, and more for all genders and ages.",
   openGraph: {
-    title: "Fashion Store",
+    title: "I love Simoona",
     description:
       "Shop the latest in fashion, from casual wear to exclusive pieces. Perfect for every style, every day.",
     url: BASE_URL,
-    siteName: "Fashion Store",
+    siteName: "I love Simoona",
     images: [
       {
-        url: "https://www.ilovesimoona.com/logo_sh.png",
+        url: OPEN_GRAPH_IMAGE_URL,
         width: 1200,
         height: 630,
-        alt: "Fashion Store - Trendy Styles",
+        alt: "I love Simoona - Trendy Styles",
       },
     ],
     locale: "en_US",
@@ -29,10 +30,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fashion Store",
+    title: "I love Simoona",
     description:
       "Stay ahead of the fashion game with our latest collection. Shop trendy clothing and accessories.",
-    images: ["https://www.ilovesimoona.com/logo_sh.png"],
+    images: [OPEN_GRAPH_IMAGE_URL],
   },
 }
 
