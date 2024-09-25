@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "Fashion Store",
     images: [
       {
-        url: "/logo_sh.png",
+        url: "https://www.ilovesimoona.com/logo_sh.png",
         width: 1200,
         height: 630,
         alt: "Fashion Store - Trendy Styles",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Fashion Store",
     description:
       "Stay ahead of the fashion game with our latest collection. Shop trendy clothing and accessories.",
-    images: ["/logo_sh.png"],
+    images: ["https://www.ilovesimoona.com/logo_sh.png"],
   },
 }
 
