@@ -33,14 +33,14 @@ export const CarouselCard = ({
   return (
     <div
       ref={container}
-      className="h-screen flex items-center justify-center sticky top-8 xl:top-0"
+      className="h-screen flex items-center justify-center sticky top-8"
     >
       <motion.div
         style={{
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className="flex flex-col relative -translate-y-1/4 w-[400px] xl:h-[800px] xl:w-[450px] rounded-[25px] p-[50px] origin-top"
+        className="flex flex-col relative -translate-y-1/4 w-[400px] 2xl:h-[750px] xl:w-[450px] rounded-[25px] p-[50px] origin-top"
       >
         <Card isFooterBlurred radius="lg" className="border-none">
           <Image
