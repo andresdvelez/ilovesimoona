@@ -1,18 +1,33 @@
 "use client"
 
+import clsx from "clsx"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/all"
-import React, { useEffect, useRef } from "react"
+import Image from "next/image"
+import React, { useEffect, useRef, useState } from "react"
+
+import PaperBg from "../../../../../public/paper-bg.png"
 
 export const TextSlider = () => {
   const firstText = useRef(null)
   const secondText = useRef(null)
   const slider = useRef(null)
+  const [isFixed, setIsFixed] = useState(true)
   let xPercent = 0
   let direction = -1
 
+  const firstWords = ["Empoderar", "Confianza", "Estilo"]
+  const secondWords = ["Elegancia", "Creatividad", "Resiliencia"]
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      setIsFixed(scrollY < 1200) // Change position based on scroll position
+    }
+
+    // Set up the scroll trigger for GSAP
     gsap.to(slider.current, {
       scrollTrigger: {
         trigger: document.documentElement,
@@ -24,7 +39,14 @@ export const TextSlider = () => {
       },
       x: "-500px",
     })
-    requestAnimationFrame(animate)
+
+    // Set up the scroll event listener
+    window.addEventListener("scroll", handleScroll)
+
+    // Clean up
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   const animate = () => {
@@ -39,20 +61,33 @@ export const TextSlider = () => {
     xPercent += 0.05 * direction
   }
 
+  useEffect(() => {
+    requestAnimationFrame(animate)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <div className="absolute top-[calc(100vh-150px)] md:top-[calc(100vh-200px)] lg:top-[calc(100vh-220px)] xl:top-[calc(100vh-290px)] overflow-hidden w-full">
+    <div
+      className={clsx(
+        isFixed
+          ? "fixed top-[calc(100vh-150px)] md:top-[calc(100vh-200px)] lg:top-[calc(100vh-220px)] xl:top-[calc(100vh-290px)]"
+          : "absolute bottom-[calc(100vh-920px)]",
+        "overflow-hidden w-full z-10"
+      )}
+    >
+      <Image src={PaperBg} alt="Paper bg" fill className="object-cover" />
       <div ref={slider} className="relative whitespace-nowrap">
         <p
           ref={firstText}
-          className="relative m-0 text-white text-[46px] md:text-[100px] lg:text-[120px] xl:text-[200px] font-medium pr-[50px]"
+          className="relative m-0 text-white text-[30px] md:text-[60px] lg:text-[80px] xl:text-[90px] font-medium pr-[50px]"
         >
-          ILoveSimoona -
+          {firstWords.join(" · ")} ·
         </p>
         <p
           ref={secondText}
-          className="absolute left-full top-0 m-0 text-white text-[46px] md:text-[100px] lg:text-[120px] xl:text-[200px] font-medium pr-[50px]"
+          className="absolute left-full top-0 m-0 text-white text-[30px] md:text-[60px] lg:text-[80px] xl:text-[90px] font-medium pr-[50px]"
         >
-          ILoveSimoona -
+          {secondWords.join(" · ")} ·
         </p>
       </div>
     </div>

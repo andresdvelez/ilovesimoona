@@ -1,25 +1,26 @@
 "use client"
 
+import { Image } from "@nextui-org/react"
+import clsx from "clsx"
 import { useTransform, motion, MotionValue } from "framer-motion"
 import { useRef, useState } from "react"
-import { Button, Card, CardFooter, Image } from "@nextui-org/react"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { ProductPreviewType } from "types/global"
 
 interface Props {
   i: number
   title: string
-  src: string
   handle: string
   range: number[]
   targetScale: number
   progress: MotionValue<number>
+  products: ProductPreviewType[]
 }
 
 export const CarouselCard = ({
   i,
   title,
-  src,
   handle,
+  products,
   range,
   progress,
   targetScale,
@@ -31,42 +32,63 @@ export const CarouselCard = ({
   const scale = useTransform(progress, range, [1, targetScale])
 
   return (
-    <div
+    <aside
       ref={container}
-      className="h-screen flex items-center justify-center sticky top-8"
+      className="h-screen w-screen flex items-center justify-center sticky top-0"
     >
       <motion.div
         style={{
+          background: "#CCC8C0",
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className="flex flex-col relative -translate-y-1/4 w-[400px] 2xl:h-[750px] xl:w-[450px] rounded-[25px] p-[50px] origin-top"
+        className="flex flex-col-reverse lg:flex-row justify-between relative w-full h-full origin-top pt-40 content-container"
       >
-        <Card isFooterBlurred radius="lg" className="border-none">
-          <Image
-            alt="Woman listing to music"
-            classNames={{
-              wrapper: "w-full",
-            }}
-            className="object-cover w-full h-full"
-            src={src}
-          />
-          <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-            <p className="text-black/80 font-medium text-tiny">{title}</p>
-            <Button
-              as={LocalizedClientLink}
-              className="text-tiny text-white bg-black/20"
-              variant="flat"
-              color="default"
-              radius="lg"
-              size="sm"
-              href={`/products/${handle}`}
-            >
-              Más información
-            </Button>
-          </CardFooter>
-        </Card>
+        <div className="w-1/2 flex flex-col gap-y-10 h-full text-start">
+          <p className="text-6xl text-white uppercase font-editorial italic">
+            New
+          </p>
+          <div className="w-full flex gap-1">
+            {products.slice(0, 2).map((product, index) => {
+              return (
+                <div
+                  key={product.id}
+                  className={clsx(
+                    "relative h-[400px] w-[300px] bg-white px-2 py-4",
+                    {
+                      "!scale-75 !translate-y-[50px]": index === 1,
+                    }
+                  )}
+                >
+                  <Image
+                    src={product?.thumbnail!}
+                    className="object-cover rounded-none max-h-96"
+                    alt={`Imagen del producto ${product.title}`}
+                  />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        <div className="w-1/2 flex flex-col h-full text-end relative">
+          <p className="uppercase text-white text-7xl font-light">{title}</p>
+          <p className="uppercase text-white text-8xl tracking-tighter relative z-10 ">
+            coleccion
+          </p>
+          {/* Shadow effect text */}
+          <p className="absolute text-black text-8xl tracking-tighter top-20 right-0 -translate-x-1 -translate-y-1">
+            coleccion
+          </p>
+          <p className="mt-12 text-start">
+            La marca fue creada originalmente para celebrar la moda femenina. A
+            partir de 2019, nuestras colecciones de vestidos se lanzaron en
+            todas sus dimensiones: desde los estilos más urbanos hasta la
+            elegancia casual. Nuestra misión es empoderar a las mujeres a través
+            de la moda que las hace sentir seguras y hermosas en todos los
+            aspectos de sus vidas.
+          </p>
+        </div>
       </motion.div>
-    </div>
+    </aside>
   )
 }

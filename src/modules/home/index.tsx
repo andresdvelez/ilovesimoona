@@ -4,8 +4,6 @@ import React, { RefObject, useRef } from "react"
 import { ProductCollectionWithPreviews } from "types/global"
 import { Region } from "@medusajs/medusa"
 import { HomeCarousel } from "./components/carousel"
-import Image from "next/image"
-import Hero2Image from "../../../public/3.jpg"
 import { useScroll, useTransform, motion } from "framer-motion"
 
 interface Props {
@@ -29,7 +27,6 @@ export const HomePage = ({ collections, region }: Props) => {
       ref={mainContainer}
       className="relative w-screen h-full"
     >
-      <Image src={Hero2Image} alt="" className="object-cover" fill />
       <HomeCarousel region={region} collections={collections} />
     </motion.div>
   )

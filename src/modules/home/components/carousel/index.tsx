@@ -32,17 +32,17 @@ export const HomeCarousel = ({ collections, region }: Props) => {
   })
 
   return (
-    <section ref={container} className="relative pt-[5vh]">
+    <section ref={container} className="relative">
       <TextSlider />
       {collections.map((collection, i) => {
-        const targetScale = 1 - i * 0.05
+        const targetScale = 1 - i * 0.02
         return (
           <CarouselCard
             key={`p_${i}`}
             i={i}
-            src={collection.products[0].thumbnail as string}
-            {...collection.products[0]}
-            handle={collection.products[0].handle as string}
+            {...collection}
+            products={collection?.products}
+            handle={collection.handle as string}
             progress={scrollYProgress}
             title={collection.title}
             range={[i * 0.25, 1]}

@@ -73,6 +73,8 @@ module.exports = {
           "Ubuntu",
           "sans-serif",
         ],
+        beckman: ["var(--font-beckman)", "sans-serif"],
+        editorial: ["var(--font-pp_editorial_old)", "sans-serif"],
       },
       keyframes: {
         ring: {
