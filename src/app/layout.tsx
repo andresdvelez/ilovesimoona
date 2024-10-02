@@ -77,7 +77,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en" data-mode="light">
       <body>
         <main
-          className={`relative ${Beckman.variable}  ${PPEditorialOld.variable} bg-[#CCC8C0] font-beckman`}
+          className={`relative ${Beckman.variable}  ${PPEditorialOld.variable} bg-white font-beckman`}
         >
           {props.children}
         </main>

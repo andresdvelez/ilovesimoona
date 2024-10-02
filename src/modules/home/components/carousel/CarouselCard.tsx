@@ -38,7 +38,7 @@ export const CarouselCard = ({
     >
       <motion.div
         style={{
-          background: "#CCC8C0",
+          background: "#fff",
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}

@@ -5,7 +5,7 @@ import { getCollectionsList, getProductsList, getRegion } from "@lib/data"
 import { ProductCollectionWithPreviews } from "types/global"
 import { cache } from "react"
 import { HomePage } from "@modules/home"
-import FeaturedProducts from "@modules/home/components/featured-products"
+import { FeaturedProducts } from "@modules/home/components/featured-products"
 
 export const metadata: Metadata = {
   title: "I Love Simoona",
