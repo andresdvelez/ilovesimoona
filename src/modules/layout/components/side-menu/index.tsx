@@ -29,7 +29,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base text-base"
+                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
                 >
                   Menu
                 </Popover.Button>
@@ -58,7 +58,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                     <ul className="flex flex-col gap-6 items-start justify-start">
                       {Object.entries(SideMenuItems).map(([name, href]) => {
                         return (
-                          <li key={name}>
+                          <li key={name} >
                             <LocalizedClientLink
                               href={href}
                               className="text-3xl leading-10 hover:text-ui-fg-disabled"

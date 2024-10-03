@@ -1,10 +1,11 @@
 "use client"
 
-import { Image } from "@nextui-org/react"
-import clsx from "clsx"
+import { Button } from "@nextui-org/react"
+import ImageNext from "next/image"
 import { useTransform, motion, MotionValue } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { ProductPreviewType } from "types/global"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 interface Props {
   i: number
@@ -14,6 +15,7 @@ interface Props {
   targetScale: number
   progress: MotionValue<number>
   products: ProductPreviewType[]
+  bannerImage: string
 }
 
 export const CarouselCard = ({
@@ -24,69 +26,91 @@ export const CarouselCard = ({
   range,
   progress,
   targetScale,
+  bannerImage,
 }: Props) => {
-  const container = useRef(null)
-
-  const [productInformation, setProductInformation] = useState()
+  const container = useRef<HTMLElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   const scale = useTransform(progress, range, [1, targetScale])
+
+  // Function to check if the bannerImage is a video format
+  const isVideo = (src: string) => {
+    return src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".ogg")
+  }
+
+  // Handle video play/pause based on visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVideoPlaying(true)
+            videoRef.current?.play()
+          } else {
+            setIsVideoPlaying(false)
+            videoRef.current?.pause()
+          }
+        })
+      },
+      { threshold: 0.5 } // Play video when at least 50% of it is visible
+    )
+
+    if (container.current) {
+      observer.observe(container.current)
+    }
+
+    return () => {
+      if (container.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        observer.unobserve(container.current)
+      }
+    }
+  }, [])
 
   return (
     <aside
       ref={container}
-      className="h-screen w-screen flex items-center justify-center sticky top-0"
+      className="h-screen w-screen flex items-center justify-center sticky top-0 overflow-hidden"
     >
+      {isVideo(bannerImage) ? (
+        <video
+          ref={videoRef}
+          src={bannerImage}
+          loop
+          muted
+          playsInline
+          className="object-cover w-full h-full absolute top-0 left-0 grayscale filter"
+        />
+      ) : (
+        <ImageNext
+          fill
+          src={bannerImage}
+          alt="banner Image"
+          className="object-cover grayscale filter"
+        />
+      )}
+
       <motion.div
         style={{
-          background: "#fff",
           scale,
-          top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className="flex flex-col-reverse lg:flex-row justify-between relative w-full h-full origin-top pt-40 content-container"
+        className="flex h-full lg:flex-row relative w-full origin-top items-center justify-center lg:justify-end content-container"
       >
-        <div className="w-1/2 flex flex-col gap-y-10 h-full text-start">
-          <p className="text-6xl text-white uppercase font-editorial italic">
-            New
+        <div className="w-full lg:w-1/2 flex flex-col h-full items-center lg:items-end text-end relative justify-center gap-2">
+          <p className="uppercase text-white text-5xl md:text-7xl font-light">
+            {title}
           </p>
-          <div className="w-full flex gap-1">
-            {products.slice(0, 2).map((product, index) => {
-              return (
-                <div
-                  key={product.id}
-                  className={clsx(
-                    "relative h-[400px] w-[300px] bg-white px-2 py-4",
-                    {
-                      "!scale-75 !translate-y-[50px]": index === 1,
-                    }
-                  )}
-                >
-                  <Image
-                    src={product?.thumbnail!}
-                    className="object-cover rounded-none max-h-96"
-                    alt={`Imagen del producto ${product.title}`}
-                  />
-                </div>
-              )
-            })}
-          </div>
-        </div>
-        <div className="w-1/2 flex flex-col h-full text-end relative">
-          <p className="uppercase text-white text-7xl font-light">{title}</p>
-          <p className="uppercase text-white text-8xl tracking-tighter relative z-10 ">
+          <p className="uppercase text-white text-2xl md:text-3xl relative z-10 font-editorial italic tracking-wide">
             coleccion
           </p>
-          {/* Shadow effect text */}
-          <p className="absolute text-black text-8xl tracking-tighter top-20 right-0 -translate-x-1 -translate-y-1">
-            coleccion
-          </p>
-          <p className="mt-12 text-start">
-            La marca fue creada originalmente para celebrar la moda femenina. A
-            partir de 2019, nuestras colecciones de vestidos se lanzaron en
-            todas sus dimensiones: desde los estilos más urbanos hasta la
-            elegancia casual. Nuestra misión es empoderar a las mujeres a través
-            de la moda que las hace sentir seguras y hermosas en todos los
-            aspectos de sus vidas.
-          </p>
+          <Button
+            as={LocalizedClientLink}
+            href={`/collections/${handle}`}
+            className="bg-black text-white w-max rounded-sm"
+          >
+            Comprar ahora
+          </Button>
         </div>
       </motion.div>
     </aside>

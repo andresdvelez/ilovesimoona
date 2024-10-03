@@ -11,7 +11,7 @@ const MedusaCTA = () => {
         href="https://www.norvik.tech"
         target="_blank"
         rel="noreferrer"
-        className="relative w-[125px] h-[65px]"
+        className="relative w-[125px] h-[75px]"
       >
         <Image src={Norvik} alt="Norvik tech" fill className="fill-[#9ca3af]" />
       </a>

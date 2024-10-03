@@ -1,6 +1,8 @@
 const { nextui } = require("@nextui-org/react")
 const path = require("path")
 
+const { addDynamicIconSelectors } = require("@iconify/tailwind")
+
 module.exports = {
   darkMode: "class",
   presets: [require("@medusajs/ui-preset")],
@@ -165,5 +167,9 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [require("tailwindcss-radix")(), nextui()],
+  plugins: [
+    require("tailwindcss-radix")(),
+    nextui(),
+    addDynamicIconSelectors(),
+  ],
 }

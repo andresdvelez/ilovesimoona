@@ -33,7 +33,7 @@ export const HomeCarousel = ({ collections, region }: Props) => {
 
   return (
     <section ref={container} className="relative">
-      <TextSlider />
+      {/* <TextSlider /> */}
       {collections.map((collection, i) => {
         const targetScale = 1 - i * 0.02
         return (
@@ -41,6 +41,7 @@ export const HomeCarousel = ({ collections, region }: Props) => {
             key={`p_${i}`}
             i={i}
             {...collection}
+            bannerImage={collection.metadata?.bannerImage!}
             products={collection?.products}
             handle={collection.handle as string}
             progress={scrollYProgress}

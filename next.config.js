@@ -23,6 +23,14 @@ const nextConfig = withStoreConfig({
       },
       {
         protocol: "https",
+        hostname: "i.ibb.co",
+      },
+      {
+        protocol: "https",
+        hostname: "i.imghippo.com",
+      },
+      {
+        protocol: "https",
         hostname: "medusa-server-testing.s3.amazonaws.com",
       },
       {

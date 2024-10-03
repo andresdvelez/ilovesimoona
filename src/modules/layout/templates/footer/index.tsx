@@ -110,7 +110,7 @@ export default async function Footer() {
             )}
           </div>
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
+        <div className="flex w-full mb-16 justify-between text-ui-fg-muted flex-col lg:flex-row">
           <Text className="txt-compact-small">
             © {new Date().getFullYear()} Ilovesimoona. Todos los derechos
             reservados.

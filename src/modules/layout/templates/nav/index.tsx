@@ -11,8 +11,8 @@ export default async function Nav() {
   const regions = await listRegions().then((regions) => regions)
 
   return (
-    <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="relative h-32 mx-auto duration-200 bg-white">
+    <div className="sticky top-0 inset-x-0 z-50 group flex flex-col">
+      <header className="relative flex flex-col mx-auto duration-200 bg-white w-full py-2">
         <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
@@ -23,7 +23,7 @@ export default async function Nav() {
           <div className="flex items-center h-full relative">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase relative w-[420px] h-[80px]"
+              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase relative w-[200px] md:w-[300px] h-[60px]"
               data-testid="nav-store-link"
             >
               <Image
@@ -48,11 +48,15 @@ export default async function Nav() {
                 </LocalizedClientLink>
               )}
               <LocalizedClientLink
-                className="hover:text-ui-fg-base"
+                className="hover:text-ui-fg-base flex items-center justify-center"
                 href="/account"
                 data-testid="nav-account-link"
               >
-                Cuenta
+                <i
+                  className="icon-[ph--user] text-2xl"
+                  role="img"
+                  aria-hidden="true"
+                />
               </LocalizedClientLink>
             </div>
             <Suspense
@@ -62,7 +66,12 @@ export default async function Nav() {
                   href="/cart"
                   data-testid="nav-cart-link"
                 >
-                  Carrito (0)
+                  <i
+                    className="icon-[cil--cart]"
+                    role="img"
+                    aria-hidden="true"
+                  />{" "}
+                  (0)
                 </LocalizedClientLink>
               }
             >
@@ -71,6 +80,9 @@ export default async function Nav() {
           </div>
         </nav>
       </header>
+      <div className="bg-black flex items-center justify-center underline text-white text-xs py-2">
+        Envíos gratis a todo el mundo
+      </div>
     </div>
   )
 }
