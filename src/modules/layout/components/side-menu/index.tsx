@@ -8,16 +8,15 @@ import { Fragment } from "react"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
+import clsx from "clsx"
 
-const SideMenuItems = {
-  Inicio: "/",
-  Productos: "/store",
-  // Buscar: "/search",
-  Cuenta: "/account",
-  Carrito: "/cart",
-}
-
-const SideMenu = ({ regions }: { regions: Region[] | null }) => {
+const SideMenu = ({
+  regions,
+  items,
+}: {
+  regions: Region[] | null
+  items: Object
+}) => {
   const toggleState = useToggleState()
 
   return (
@@ -26,7 +25,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
         <Popover className="h-full flex">
           {({ open, close }) => (
             <>
-              <div className="relative flex h-full">
+              <div className="relative md:hidden flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
                   className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
@@ -56,9 +55,9 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                       </button>
                     </div>
                     <ul className="flex flex-col gap-6 items-start justify-start">
-                      {Object.entries(SideMenuItems).map(([name, href]) => {
+                      {Object.entries(items).map(([name, href]) => {
                         return (
-                          <li key={name} >
+                          <li key={name}>
                             <LocalizedClientLink
                               href={href}
                               className="text-3xl leading-10 hover:text-ui-fg-disabled"

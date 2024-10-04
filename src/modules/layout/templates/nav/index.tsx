@@ -6,7 +6,14 @@ import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import Image from "next/image"
 import LogoImage from "../../../../../public/logo-horizontal.png"
-
+import NavBar from "@modules/layout/components/nav-bar"
+const SideMenuItems = {
+  Inicio: "/",
+  Productos: "/store",
+  // Buscar: "/search",
+  Cuenta: "/account",
+  Carrito: "/cart",
+}
 export default async function Nav() {
   const regions = await listRegions().then((regions) => regions)
 
@@ -16,7 +23,7 @@ export default async function Nav() {
         <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
-              <SideMenu regions={regions} />
+              <SideMenu items={SideMenuItems} regions={regions} />
             </div>
           </div>
 
@@ -80,6 +87,7 @@ export default async function Nav() {
           </div>
         </nav>
       </header>
+      <NavBar items={SideMenuItems} />
       <div className="bg-black flex items-center justify-center underline text-white text-xs py-2">
         Envíos gratis a todo el mundo
       </div>

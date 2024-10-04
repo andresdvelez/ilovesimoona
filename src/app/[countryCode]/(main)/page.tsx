@@ -1,4 +1,4 @@
-import { Product } from "@medusajs/medusa"
+import { Product, ProductCollection } from "@medusajs/medusa"
 import { Metadata } from "next"
 
 import { getCollectionsList, getProductsList, getRegion } from "@lib/data"
@@ -6,7 +6,7 @@ import { ProductCollectionWithPreviews } from "types/global"
 import { cache } from "react"
 import { HomePage } from "@modules/home"
 import { FeaturedProducts } from "@modules/home/components/featured-products"
-
+import NewProducts from "@modules/layout/components/new-products"
 export const metadata: Metadata = {
   title: "I Love Simoona",
   description:
@@ -23,10 +23,12 @@ const getCollectionsWithProducts = cache(
       return null
     }
 
-    const collectionIds = collections.map((collection) => collection.id)
+    const collectionIds = collections.map(
+      (collection: ProductCollection) => collection.id
+    )
 
     await Promise.all(
-      collectionIds.map((id) =>
+      collectionIds.map((id: number) =>
         getProductsList({
           queryParams: { collection_id: [id] },
           countryCode,
@@ -38,7 +40,8 @@ const getCollectionsWithProducts = cache(
 
         if (collections) {
           collection = collections.find(
-            (collection) => collection.id === queryParams?.collection_id?.[0]
+            (collection: ProductCollection) =>
+              collection.id === queryParams?.collection_id?.[0]
           )
         }
 
@@ -69,7 +72,8 @@ export default async function Home({
   return (
     <>
       <HomePage collections={collections} region={region} />
-      <div className="py-12">
+      <div className="">
+        <NewProducts collections={collections} />
         <ul className="flex flex-col gap-x-6">
           <FeaturedProducts collections={collections} region={region} />
         </ul>

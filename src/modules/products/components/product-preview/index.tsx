@@ -37,13 +37,14 @@ export default async function ProductPreview({
   return (
     <LocalizedClientLink
       href={`/products/${productPreview.handle}`}
-      className="group"
+      className="group rounded-none"
     >
-      <div data-testid="product-wrapper">
+      <div data-testid="product-wrapper" className="">
         <Thumbnail
           thumbnail={productPreview.thumbnail}
           size="full"
           isFeatured={isFeatured}
+          className="!rounded-none"
         />
         <div className="flex txt-compact-medium mt-4 justify-between">
           <Text className="text-ui-fg-subtle" data-testid="product-title">
