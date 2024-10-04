@@ -41,7 +41,7 @@ export const HomeCarousel = ({ collections, region }: Props) => {
             key={`p_${i}`}
             i={i}
             {...collection}
-            bannerImage={collection.metadata?.bannerImage!}
+            bannerImage={collection.metadata?.bannerImage as string}
             products={collection?.products}
             handle={collection.handle as string}
             progress={scrollYProgress}

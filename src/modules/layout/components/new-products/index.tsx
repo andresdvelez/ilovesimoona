@@ -1,17 +1,17 @@
 "use client"
-import { Product, ProductCollection } from "@medusajs/product"
 import { Button } from "@nextui-org/react"
 import Image from "next/image"
 import React, { useEffect, useState } from "react"
+import { ProductCollectionWithPreviews, ProductPreviewType } from "types/global"
 
 interface Props {
-  collections: ProductCollection[]
+  collections: ProductCollectionWithPreviews[]
 }
 
 const NewProducts = ({ collections }: Props) => {
-  const [recentProcucts, setRecentProcucts] = useState<Product[]>([])
+  const [recentProcucts, setRecentProcucts] = useState<ProductPreviewType[]>([])
   useEffect(() => {
-    const newArray: ProductCollection[] = collections.sort((a, b) => {
+    const newArray = collections.sort((a, b) => {
       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     })
     setRecentProcucts(newArray[0].products)

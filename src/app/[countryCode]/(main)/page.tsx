@@ -7,6 +7,7 @@ import { cache } from "react"
 import { HomePage } from "@modules/home"
 import { FeaturedProducts } from "@modules/home/components/featured-products"
 import NewProducts from "@modules/layout/components/new-products"
+
 export const metadata: Metadata = {
   title: "I Love Simoona",
   description:
@@ -23,12 +24,10 @@ const getCollectionsWithProducts = cache(
       return null
     }
 
-    const collectionIds = collections.map(
-      (collection: ProductCollection) => collection.id
-    )
+    const collectionIds = collections.map((collection) => collection.id)
 
     await Promise.all(
-      collectionIds.map((id: number) =>
+      collectionIds.map((id) =>
         getProductsList({
           queryParams: { collection_id: [id] },
           countryCode,
@@ -40,8 +39,7 @@ const getCollectionsWithProducts = cache(
 
         if (collections) {
           collection = collections.find(
-            (collection: ProductCollection) =>
-              collection.id === queryParams?.collection_id?.[0]
+            (collection) => collection.id === queryParams?.collection_id?.[0]
           )
         }
 
