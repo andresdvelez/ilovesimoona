@@ -36,7 +36,9 @@ export const CarouselCard = ({
 
   // Function to check if the bannerImage is a video format
   const isVideo = (src: string) => {
-    return src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".ogg")
+    return (
+      src?.endsWith(".mp4") || src?.endsWith(".webm") || src?.endsWith(".ogg")
+    )
   }
 
   // Handle video play/pause based on visibility

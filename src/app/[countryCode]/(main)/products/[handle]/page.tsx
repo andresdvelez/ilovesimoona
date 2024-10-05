@@ -10,6 +10,7 @@ import {
 } from "@lib/data"
 import { Region } from "@medusajs/medusa"
 import ProductTemplate from "@modules/products/templates"
+import { BrandLinkProduct } from "@modules/products/templates/brand-link-template"
 
 type Props = {
   params: { countryCode: string; handle: string }
@@ -56,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${product.title} | Medusa Store`,
+    title: `${product.title} | I Love Simoona Store`,
     description: `${product.title}`,
     openGraph: {
       title: `${product.title} | Medusa Store`,
@@ -66,10 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const getPricedProductByHandle = async (
-  handle: string,
-  region: Region
-) => {
+const getPricedProductByHandle = async (handle: string, region: Region) => {
   const { product } = await getProductByHandle(handle).then(
     (product) => product
   )
@@ -99,11 +97,20 @@ export default async function ProductPage({ params }: Props) {
     notFound()
   }
 
-  return (
-    <ProductTemplate
-      product={pricedProduct}
-      region={region}
-      countryCode={params.countryCode}
-    />
-  )
+  if (pricedProduct?.collection?.metadata.isBrandLink) {
+    return (
+      <BrandLinkProduct
+        product={pricedProduct}
+        countryCode={params.countryCode}
+      />
+    )
+  } else {
+    return (
+      <ProductTemplate
+        product={pricedProduct}
+        region={region}
+        countryCode={params.countryCode}
+      />
+    )
+  }
 }

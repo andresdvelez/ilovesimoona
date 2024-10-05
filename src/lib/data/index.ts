@@ -480,6 +480,8 @@ export const getProductsList = cache(async function ({
       throw err
     })
 
+  console.log(products)
+
   const transformedProducts = products.map((product) => {
     return transformProductPreview(product, region!)
   })
@@ -521,6 +523,8 @@ export const getProductsListWithSort = cache(
       },
       countryCode,
     })
+
+    console.log(products)
 
     const sortedProducts = sortProducts(products, sortBy)
 

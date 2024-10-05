@@ -14,7 +14,7 @@ const NewProducts = ({ collections }: Props) => {
     const newArray = collections.sort((a, b) => {
       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     })
-    setRecentProcucts(newArray[0].products)
+    setRecentProcucts(newArray[0]?.products)
   }, [collections])
 
   return (
@@ -30,7 +30,7 @@ const NewProducts = ({ collections }: Props) => {
                 return (
                   <div
                     key={index}
-                    className="relative h-[500px] w-[400px] flex justify-center items-end pb-6"
+                    className="relative h-[400px] md:h-[500px] w-[400px] flex justify-center items-end pb-6"
                   >
                     <Image
                       fill

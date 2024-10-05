@@ -27,7 +27,12 @@ export const HomePage = ({ collections, region }: Props) => {
       ref={mainContainer}
       className="relative w-screen h-full"
     >
-      <HomeCarousel region={region} collections={collections} />
+      <HomeCarousel
+        region={region}
+        collections={collections.filter(
+          (collection) => !collection.metadata?.isBrandLink
+        )}
+      />
     </motion.div>
   )
 }

@@ -8,6 +8,7 @@ import {
 } from "@lib/data"
 import CollectionTemplate from "@modules/collections/templates"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import { BrandLinkTemplate } from "@modules/collections/brand-link-template"
 
 type Props = {
   params: { handle: string; countryCode: string }
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const metadata = {
-    title: `${collection.title} | Medusa Store`,
+    title: `${collection.title} | I Love Simoona Store`,
     description: `${collection.title} collection`,
   } as Metadata
 
@@ -70,12 +71,23 @@ export default async function CollectionPage({ params, searchParams }: Props) {
     notFound()
   }
 
-  return (
-    <CollectionTemplate
-      collection={collection}
-      page={page}
-      sortBy={sortBy}
-      countryCode={params.countryCode}
-    />
-  )
+  if (collection.metadata.isBrandLink) {
+    return (
+      <BrandLinkTemplate
+        collection={collection}
+        page={page}
+        sortBy={sortBy}
+        countryCode={params.countryCode}
+      />
+    )
+  } else {
+    return (
+      <CollectionTemplate
+        collection={collection}
+        page={page}
+        sortBy={sortBy}
+        countryCode={params.countryCode}
+      />
+    )
+  }
 }

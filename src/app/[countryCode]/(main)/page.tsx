@@ -6,7 +6,8 @@ import { ProductCollectionWithPreviews } from "types/global"
 import { cache } from "react"
 import { HomePage } from "@modules/home"
 import { FeaturedProducts } from "@modules/home/components/featured-products"
-import NewProducts from "@modules/layout/components/new-products"
+import NewProducts from "@modules/home/components/new-products"
+import { BrandLinks } from "@modules/home/components/brand-links"
 
 export const metadata: Metadata = {
   title: "I Love Simoona",
@@ -18,7 +19,7 @@ const getCollectionsWithProducts = cache(
   async (
     countryCode: string
   ): Promise<ProductCollectionWithPreviews[] | null> => {
-    const { collections } = await getCollectionsList(0, 3)
+    const { collections } = await getCollectionsList(0, 8)
 
     if (!collections) {
       return null
@@ -67,14 +68,22 @@ export default async function Home({
     return null
   }
 
+  const collectionsWithoutBrandLinks = collections.filter(
+    (collection) => !collection.metadata?.isBrandLink
+  )
+
   return (
     <>
-      <HomePage collections={collections} region={region} />
+      <HomePage collections={collectionsWithoutBrandLinks} region={region} />
       <div className="">
-        <NewProducts collections={collections} />
+        <NewProducts collections={collectionsWithoutBrandLinks} />
         <ul className="flex flex-col gap-x-6">
-          <FeaturedProducts collections={collections} region={region} />
+          <FeaturedProducts
+            collections={collectionsWithoutBrandLinks}
+            region={region}
+          />
         </ul>
+        <BrandLinks collections={collections} />
       </div>
     </>
   )

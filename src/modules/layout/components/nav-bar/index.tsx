@@ -16,7 +16,7 @@ const NavBar = ({ items }: { items: Object }) => {
             >
               <LocalizedClientLink
                 href={href}
-                className="text-xl border-b-2 border-transparent leading-10 hover:text-ui-fg-disabled relative after:origin-left after:w-0 after:h-2 after:absolute after:-bottom-[0.80rem] after:left-0 hover:after:w-full after:bg-black after:transition-all"
+                className="text-base border-b-2 border-transparent leading-10 hover:text-ui-fg-disabled relative after:origin-left after:w-0 after:h-2 after:absolute after:-bottom-[0.90rem] after:left-0 hover:after:w-full after:bg-black after:transition-all"
                 data-testid={`${name.toLowerCase()}-link`}
               >
                 {name}
