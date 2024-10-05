@@ -1,10 +1,9 @@
-import { ProductCollection } from "@medusajs/medusa"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
-import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import Image from "next/image"
 import React, { Suspense } from "react"
+import { ProductCollectionType } from "types/global"
 
 export const BrandLinkTemplate = ({
   sortBy,
@@ -13,7 +12,7 @@ export const BrandLinkTemplate = ({
   countryCode,
 }: {
   sortBy?: SortOptions
-  collection: ProductCollection
+  collection: ProductCollectionType
   page?: string
   countryCode: string
 }) => {
@@ -25,7 +24,7 @@ export const BrandLinkTemplate = ({
         <h1>{collection?.title}</h1>
         <div className="relative w-full h-[400px] rounded-md flex items-center justify-center">
           <Image
-            src={collection?.metadata?.descriptionImage!}
+            src={collection?.metadata?.descriptionImage! as string}
             fill
             className="object-cover relative backdrop-grayscale"
             alt={collection.title}

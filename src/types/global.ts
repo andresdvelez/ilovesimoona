@@ -1,4 +1,10 @@
-import { Cart, ProductCategory, ProductVariant, Region } from "@medusajs/medusa"
+import {
+  Cart,
+  Product,
+  ProductCategory,
+  ProductVariant,
+  Region,
+} from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { ProductCollection } from "@medusajs/product"
 
@@ -56,4 +62,22 @@ export type ProductCategoryWithChildren = Omit<
 > & {
   category_children: ProductCategory[]
   category_parent?: ProductCategory
+}
+
+export interface ProductCollectionType {
+  id: string
+  title: string
+  handle?: string
+  products: Array<Product>
+  metadata?: {
+    bannerImage?: string
+    isBrandLink?: string
+    descriptionImage?: string
+    description?: string
+    subtitle?: string
+  }
+  created_at: Date
+  updated_at: Date
+  deleted_at?: Date
+  onInit(): void
 }

@@ -74,7 +74,7 @@ export default async function CollectionPage({ params, searchParams }: Props) {
   if (collection.metadata.isBrandLink) {
     return (
       <BrandLinkTemplate
-        collection={collection}
+        collection={collection as any}
         page={page}
         sortBy={sortBy}
         countryCode={params.countryCode}
