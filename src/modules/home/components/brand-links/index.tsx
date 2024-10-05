@@ -9,12 +9,12 @@ interface Props {
 
 export const BrandLinks = ({ collections }: Props) => {
   return (
-    <section className="bg-[#f7f6f5] p-10">
+    <section className="p-10 content-container">
       <div>
         <h4 className="text-center mb-10 font-editorial tracking-wide text-2xl">
           Enlaces de marca
         </h4>
-        <ul className="grid grid-cols-2 gap-5 justify-around">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-5 justify-around">
           {collections
             .filter((collection) => collection?.metadata?.isBrandLink)
             .slice(0, 4)
@@ -30,7 +30,7 @@ export const BrandLinks = ({ collections }: Props) => {
                     className="object-cover grayscale filter"
                     fill
                   />
-                  <div className="flex items-end justify-center text-white z-10 text-4xl tracking-wide">
+                  <div className="flex items-end justify-center text-white z-10 text-xl md:text-2xl lg:text-4xl tracking-wide text-center">
                     {collection.title}
                   </div>
                 </li>

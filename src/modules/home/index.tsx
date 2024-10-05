@@ -22,12 +22,9 @@ export const HomePage = ({ collections, region }: Props) => {
   const imageScale = useTransform(scrollYProgress, [0, 1], [2, 1])
 
   return (
-    <motion.div
-      style={{ scale: imageScale }}
-      ref={mainContainer}
-      className="relative w-screen h-full"
-    >
+    <motion.div ref={mainContainer} className="relative w-screen h-full">
       <HomeCarousel
+        imageScale={imageScale}
         region={region}
         collections={collections.filter(
           (collection) => !collection.metadata?.isBrandLink

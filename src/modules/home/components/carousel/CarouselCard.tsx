@@ -16,6 +16,7 @@ interface Props {
   progress: MotionValue<number>
   products: ProductPreviewType[]
   bannerImage: string
+  imageScale: MotionValue<number>
 }
 
 export const CarouselCard = ({
@@ -27,6 +28,7 @@ export const CarouselCard = ({
   progress,
   targetScale,
   bannerImage,
+  imageScale,
 }: Props) => {
   const container = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -34,14 +36,12 @@ export const CarouselCard = ({
 
   const scale = useTransform(progress, range, [1, targetScale])
 
-  // Function to check if the bannerImage is a video format
   const isVideo = (src: string) => {
     return (
       src?.endsWith(".mp4") || src?.endsWith(".webm") || src?.endsWith(".ogg")
     )
   }
 
-  // Handle video play/pause based on visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -55,7 +55,7 @@ export const CarouselCard = ({
           }
         })
       },
-      { threshold: 0.5 } // Play video when at least 50% of it is visible
+      { threshold: 0.5 }
     )
 
     if (container.current) {
@@ -73,16 +73,17 @@ export const CarouselCard = ({
   return (
     <aside
       ref={container}
-      className="h-screen w-screen flex items-center justify-center sticky top-0 overflow-hidden"
+      className="h-screen w-full flex items-center justify-center sticky top-0 overflow-hidden max-w-[screen]"
     >
       {isVideo(bannerImage) ? (
-        <video
+        <motion.video
+          style={{ scale: imageScale }}
           ref={videoRef}
           src={bannerImage}
           loop
           muted
           playsInline
-          className="object-cover w-full h-full absolute top-0 left-0 grayscale filter"
+          className="object-cover h-full absolute top-0 left-0 grayscale filter w-full overflow-hidden"
         />
       ) : (
         <ImageNext
@@ -97,7 +98,7 @@ export const CarouselCard = ({
         style={{
           scale,
         }}
-        className="flex h-full lg:flex-row relative w-full origin-top items-center justify-center lg:justify-end content-container"
+        className="flex h-full lg:flex-row relative w-screen origin-top items-center justify-center lg:justify-end content-container overflow-hidden"
       >
         <div className="w-full lg:w-1/2 flex flex-col h-full items-center lg:items-end text-end relative justify-center gap-2">
           <p className="uppercase text-white text-5xl md:text-7xl font-light">

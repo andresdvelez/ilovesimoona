@@ -88,9 +88,20 @@ export default async function Nav() {
         </nav>
       </header>
       <NavBar items={SideMenuItems} />
-      <div className="bg-black flex items-center justify-center underline text-white text-xs py-2">
-        Envíos gratis a todo el mundo
-      </div>
+      <ul className="bg-black flex items-center justify-center underline text-white text-xs py-2 gap-2">
+        <LocalizedClientLink href="/collections/asesoria-de-imagen">
+          Asesoria de imagen
+        </LocalizedClientLink>
+        <LocalizedClientLink href="/collections/club-de-lectura">
+          Club de lectura
+        </LocalizedClientLink>
+        <LocalizedClientLink href="/collections/empoderamient-femenino">
+          Empoderamiento femenino
+        </LocalizedClientLink>
+        <LocalizedClientLink href="/collections/arte">
+          Articulos de arte
+        </LocalizedClientLink>
+      </ul>
     </div>
   )
 }

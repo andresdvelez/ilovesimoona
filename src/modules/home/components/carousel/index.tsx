@@ -1,7 +1,7 @@
 "use client"
 
 import Lenis from "@studio-freight/lenis"
-import { useScroll } from "framer-motion"
+import { MotionValue, useScroll } from "framer-motion"
 import React, { useEffect, useRef } from "react"
 import { ProductCollectionWithPreviews } from "types/global"
 import { CarouselCard } from "./CarouselCard"
@@ -11,9 +11,10 @@ import { TextSlider } from "../text-slider"
 interface Props {
   collections: ProductCollectionWithPreviews[]
   region: Region
+  imageScale: MotionValue<number>
 }
 
-export const HomeCarousel = ({ collections, region }: Props) => {
+export const HomeCarousel = ({ collections, region, imageScale }: Props) => {
   const container = useRef(null)
   const { scrollYProgress } = useScroll({
     target: container,
@@ -41,6 +42,7 @@ export const HomeCarousel = ({ collections, region }: Props) => {
             key={`p_${i}`}
             i={i}
             {...collection}
+            imageScale={imageScale}
             bannerImage={collection.metadata?.bannerImage as string}
             products={collection?.products}
             handle={collection.handle as string}
