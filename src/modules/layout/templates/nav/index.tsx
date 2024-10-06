@@ -88,7 +88,7 @@ export default async function Nav() {
         </nav>
       </header>
       <NavBar items={SideMenuItems} />
-      <ul className="bg-black flex items-center justify-center underline text-white text-xs py-2 gap-2">
+      <ul className="bg-black flex items-center justify-center underline text-white text-[8.5px] md:text-xs py-2 gap-1 md:gap-2">
         <LocalizedClientLink href="/collections/asesoria-de-imagen">
           Asesoria de imagen
         </LocalizedClientLink>
