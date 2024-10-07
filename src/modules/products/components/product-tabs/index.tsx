@@ -7,6 +7,7 @@ import FastDelivery from "@modules/common/icons/fast-delivery"
 import Refresh from "@modules/common/icons/refresh"
 
 import Accordion from "./accordion"
+import { Image } from "@nextui-org/react"
 
 type ProductTabsProps = {
   product: PricedProduct
@@ -19,8 +20,8 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
       component: <ProductInfoTab product={product} />,
     },
     {
-      label: "Envío & reembolsos",
-      component: <ShippingInfoTab />,
+      label: "Tabla de tallas",
+      component: <SizesTableTab product={product} />,
     },
   ]
 
@@ -122,6 +123,17 @@ const ShippingInfoTab = () => {
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+const SizesTableTab = ({ product }: ProductTabsProps) => {
+  return (
+    <div className="text-small-regular py-8">
+      <Image
+        src={product?.metadata?.sizesTable as string}
+        alt="Tabla de tallas"
+      />
     </div>
   )
 }
