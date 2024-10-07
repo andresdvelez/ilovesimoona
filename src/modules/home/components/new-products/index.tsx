@@ -1,4 +1,5 @@
 "use client"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Button } from "@nextui-org/react"
 import Image from "next/image"
 import React, { useEffect, useState } from "react"
@@ -25,7 +26,7 @@ const NewProducts = ({ collections }: Props) => {
         </h4>
         <div className="flex flex-wrap gap-y-5 justify-around">
           {recentProcucts &&
-            recentProcucts?.map((item: any, index: number) => {
+            recentProcucts?.map((item: ProductPreviewType, index: number) => {
               if (index <= 2) {
                 return (
                   <div
@@ -35,12 +36,14 @@ const NewProducts = ({ collections }: Props) => {
                     <Image
                       fill
                       className="rounded-none absolute w-full h-full"
-                      src={item.thumbnail}
-                      alt={`Imagen de la colección`}
+                      src={item.thumbnail!}
+                      alt={`Imagen del producto ${item.title}`}
                     />
                     <Button
                       className="bg-transparent hover:bg-white hover:text-black border-2 border-white text-white"
                       radius="none"
+                      as={LocalizedClientLink}
+                      href={`/products/${item.handle}`}
                     >
                       Comprar ahora
                     </Button>
